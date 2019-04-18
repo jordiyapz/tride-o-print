@@ -1,0 +1,7 @@
+CREATE TABLE buyer (
+	id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	username VARCHAR(255),
+	email VARCHAR(255),
+	password VARCHAR(255),
+	gender VARCHAR(20)
+);
