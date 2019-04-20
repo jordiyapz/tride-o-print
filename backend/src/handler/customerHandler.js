@@ -105,45 +105,52 @@ const signupExistingCustomer = (req, res, next) => {
 }
 
 const loginCustomer = (req, res, next) => {
-    const body = req.body;
+		const body = req.body;		
     const {input} = body;
     let finder;
     if (
         /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(input)
     ) finder = User.find({ email: input });
     else finder = User.find({ username: input });
-    
+        
     finder.exec()
         .then(users => {
-            if (users.length > 0) {
-                const user = users[0];
-                Customer.find({ userId: user._id }).exec()
-                    .then(customers => {
-                        if (customers.length > 0) {
-                            const token = jwt.sign({
-                                userId: user._id,
-                                username: user.username,
-                                address: user.address,
-                                email: user.email,
-                                phoneNumber: user.phoneNumber,
-                                birthDate: user.birthDate,
-                                roles: user.roles
-                            }, 
-                            'oPrint',
-                            {
-                                expiresIn: "5m"
-                            });
-                            return res.status(200).json({
-                                message: 'Login successful!',
-                                token: token
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        res.status(500).json({ error:error });
-                    });
-            }
+            if (users.length == 0) 
+                return res.status(409).json({ message: 'Auth failed' });
+            const user = users[0];
+            bcrypt.compare(body.password, user.password, (err, result) => {
+                if (err) 
+									return res.status(500).json({ err });
+								if (!result) 
+									return res.status(409).json({ message: 'Auth failed' });
+									Customer.find({ userId: user._id })
+										.exec()
+										.then(customers => {
+												if (customers.length > 0) {
+														const token = jwt.sign({
+																userId: user._id,
+																username: user.username,
+																address: user.address,
+																email: user.email,
+																phoneNumber: user.phoneNumber,
+																roles: user.roles
+														}, 
+														'oPrint',
+														{
+																expiresIn: "5m"
+														});
+														return res.status(200).json({
+																message: 'Login successful!',
+																token: token
+														});
+												}
+										})
+										.catch(error => {
+												console.log(error);
+												res.status(500).json({ error:error });
+										});                    
+            });
+                    
         })
         .catch(error => {
             console.log(error);

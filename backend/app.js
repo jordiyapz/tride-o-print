@@ -9,7 +9,7 @@ const app = express();
 const path = require('path');
 /** mongoose */
 const dbRoute = "mongodb://localhost:27017/trideOPrint";
-
+// const dbRoute = "mongodb+srv://jordiyapz:sen45321@mongouploads-mxgpe.mongodb.net/trideOPrint?retryWrites=true";
 mongoose.Promise = global.Promise;
 mongoose.connect(dbRoute, { useNewUrlParser: true }, (err) => {
     if (err) return console.log(err);
@@ -45,6 +45,10 @@ app.get('/',(req, res) => {
 });
 app.get('/product',(req, res) => {
     res.sendFile(path.resolve(__dirname, 'pages/product.html'));
+});
+
+app.get('/register',(req, res) => {
+    res.sendFile(path.resolve(__dirname, 'pages/register.html'));
 });
 
 const userRoutes = require('./src/router/users');

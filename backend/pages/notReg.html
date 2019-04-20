@@ -60,25 +60,26 @@
 											</button>
 										</div>
 										<div class="modal-body">
-											<form>
+											<form action="/v1/customer/login" method="post">
 												<div class="form-group">
-													<label for="recipient-name" class="col-form-label">Username</label>
-													<input type="text" class="form-control" id="recipient-name">
+													<label for="recipient-name" class="col-form-label">Username or Email</label>
+													<input type="text" name="input" class="form-control" id="recipient-name">
 												</div>
 												<div class="form-group">
 													<label for="message-text" class="col-form-label">Password</label>
-													<input type="password" class="form-control" id="message-text"></textarea>
+													<input type="password" name="password" class="form-control" id="message-text"></textarea>
+												</div>
+												<div class="modal-footer">
+													<input type="submit" class="btn btn-secondary" onclick="console.log('hello')" value="Login" style="background-color: rgb(209,0,36); color: white" />
+													<!-- data-dismiss="modal" -->
 												</div>
 											</form>
 										</div>
-										<div class="modal-footer">
-											<a href="register.php"><button type="button" class="btn btn-secondary" data-dismiss="modal">Register</button></a>
-											<button type="button" class="btn btn-secondary" style="background-color: rgb(209,0,36); color: white" data-dismiss="modal">Login</button>
-										</div>
+										
 									</div>
 								</div>
 							</div>
-							<a href="register.php"><button type="button" class="btn btn-secondary" data-dismiss="modal">Register</button></a>
+							<a href="/register"><button type="button" class="btn btn-secondary" data-dismiss="modal">Register</button></a>
 					</ul>
 				</div>
 			</div>
