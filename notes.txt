@@ -1,0 +1,2 @@
+Jordi: Ubah semua resource jadi 'assets/<resource>'
+Agenda:
