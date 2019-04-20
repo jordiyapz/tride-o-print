@@ -27,6 +27,84 @@
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
 
+		<style>
+			.product-img>img {
+				width: 213px;
+				height: 213px;
+			}
+		</style>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script>
+			axios.get('https://trideoprint.localtunnel.me/v1/product')
+				.then(res => {
+					console.log(res);
+					$(() => {
+						const newProduct = $('#newProduct');
+						res.data.product.forEach(product => {
+							const _product = $(`<div class="product"></div>`);
+							const _img = $(`<div class="product-img"></div>`)
+							_img.append(`<img class src="${product.images[0].path}">`);												
+							const _body = $(`<div class="product-body"></div>`);
+							const _category = $(`<p class="product-category">${product.category}</p>`);
+							const _name = $(`<h3 class="product-name"></h3>`);
+							_name.append($(`<a href="#">${product.name}</a>`));
+							const _price = $(`<h4 class="product-price">${toRpString(product.price.$numberDecimal)}</h4>`);
+							const _rating = $(`<div class="product-rating"></div>`);
+							const productRating = Math.floor(parseFloat(product.rating.$numberDecimal));
+							console.log({name: product.name, productRating: product.rating.$numberDecimal});
+							for(let i = 0; i < productRating; i++) {
+								_rating.append($(`<i class="fa fa-star"></i>`));
+							}
+							const _btns = $(`<div class="product-btns"></div>`);
+							_btns.append(
+								$(`<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>`),
+								$(`<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>`),
+								$(`<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>`)
+							)			
+							const _atc = $(`<div class="add-to-cart"></div>`);
+							_atc.append(`<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>`)
+
+							_body.append(_category, _name, _price, _rating, _btns);
+							_product.append(_img, _body, _atc);
+							newProduct.append(_product);
+						})
+					});				
+				})
+				.catch( error => console.log(error) );
+		</script>
+		<!-- <div class="product">
+			<div class="product-img">
+				<img src="assets/img/garden1.jpg" alt="">
+				<div class="product-label">
+					<span class="sale">-30%</span>
+					<span class="new">NEW</span>
+				</div>
+			</div>
+			<div class="product-body">
+				<p class="product-category">Gardens</p>
+				<h3 class="product-name"><a href="#">hehehe Flower</a></h3>
+				<h4 class="product-price">Rp.1.890.000,00 <del class="product-old-price">Rp.2.700.000,00</del></h4>
+				<div class="product-rating">
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+				</div>
+				<div class="product-btns">
+					<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+					<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+					<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+				</div>
+			</div>
+			<div class="add-to-cart">
+				<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+			</div>
+		</div> -->
+
+
+
+
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -306,7 +384,7 @@
 							<div class="products-tabs">
 								<!-- tab -->
 								<div id="tab1" class="tab-pane active">
-									<div class="products-slick" data-nav="#slick-nav-1">
+									<div id="newProduct" class="products-slick" data-nav="#slick-nav-1">
 										<!-- product -->
 										<div class="product">
 											<div class="product-img">
@@ -318,7 +396,7 @@
 											</div>
 											<div class="product-body">
 												<p class="product-category">Gardens</p>
-												<h3 class="product-name"><a href="#">Woody Flower</a></h3>
+												<h3 class="product-name"><a href="#">hehehe Flower</a></h3>
 												<h4 class="product-price">Rp.1.890.000,00 <del class="product-old-price">Rp.2.700.000,00</del></h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
@@ -1095,12 +1173,12 @@
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->
+		<script scr="assets/js/custom.js"></script>
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/slick.min.js"></script>
 		<script src="assets/js/nouislider.min.js"></script>
 		<script src="assets/js/jquery.zoom.min.js"></script>
 		<script src="assets/js/main.js"></script>
-
 	</body>
 </html>

@@ -26,7 +26,8 @@
   },
   "homepage": "https://github.com/jordiyapz/TUBES-MBD#readme",
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "localtunnel": "^1.9.1"
   },
   "dependencies": {
     "express": "^4.16.4",

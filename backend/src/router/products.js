@@ -26,6 +26,6 @@ const controller = require('../controller');
 
 router.get('/', controller.listAllProduct);
 router.post('/add-product', upload.array('image'), controller.addProduct);
-router.post('/add-many-product', upload.array('image'), controller.addProduct);
+// router.post('/add-many-product', upload.array('image'), controller.addProduct);
 
 module.exports = router;

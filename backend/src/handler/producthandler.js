@@ -19,14 +19,15 @@ const listAllProduct = (req, res, next) => {
 }
 
 const addProduct = (req, res, next) => {
-    console.log(req.file);
+    console.log(req.file);    
+    console.log({body:req.body});
     const body = req.body;
     const files = req.files;
     const sellerId = body.sellerId;
     Seller.find({_id: sellerId})
         .exec()
         .then(docs => {
-            if (docs.length < 1) return res.status(404).json({message: 'Seller not found'});
+            if (docs.length == 0) return res.status(404).json({message: 'Seller not found'});            
             const {name, category, description, price} = body;
             let productId = new mongoose.Types.ObjectId();
             const product = new Product({
