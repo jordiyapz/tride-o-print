@@ -15,15 +15,17 @@ const fileFilter = (req, file, cb) => {
     else
         cb(null, false);
 }
-
 const upload = multer({storage, limits: {
     fileSize: 1024 * 1024 * 64, //64MB max
     fileFilter
 }}); 
 
+const adminOnly = require('../middleware/admin-only');
+
 const controller = require('../controller');
 
 router.get('/', controller.listAllProduct);
-router.post('/add-product', upload.single('image'), controller.addProduct);
+router.post('/add-product', upload.array('image'), controller.addProduct);
+router.post('/add-many-product', upload.array('image'), controller.addProduct);
 
 module.exports = router;

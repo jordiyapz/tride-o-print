@@ -21,7 +21,7 @@ const listAllProduct = (req, res, next) => {
 const addProduct = (req, res, next) => {
     console.log(req.file);
     const body = req.body;
-    const file = req.file;
+    const files = req.files;
     const sellerId = body.sellerId;
     Seller.find({_id: sellerId})
         .exec()
@@ -38,10 +38,58 @@ const addProduct = (req, res, next) => {
                 price,
                 cost: price
             });
-            product.images.push({
-                filename: file.filename,
-                path: file.path
+            files.forEach(file => {
+                product.images.push({
+                    path: file.path
+                })
             });
+            const seller = docs[0];
+            seller.products.push(productId);
+            seller.save()
+                .catch(error => {
+                    console.log(error);
+                    res.status(500).json({ error:error });
+                });
+            product.save()
+                .then(result => {
+                    console.log(result);
+                    res.status(201).json({ message: 'Product added!' });
+                }).catch(error => {
+                    console.log(error);
+                    res.status(500).json({ error:error });
+                });
+        })
+        .catch(err => {
+            if (err) return res.status(500).json({err:err});
+        })
+}
+
+const addManyProduct = (req, res, next) => {
+    console.log(req.file);
+    const body = req.body;
+    const files = req.files;
+    const sellerId = body.sellerId;
+    Seller.find({_id: sellerId})
+        .exec()
+        .then(docs => {
+            if (docs.length < 1) return res.status(404).json({message: 'Seller not found'});
+            const {sellerId} = body
+            files.forEach((img, idx) => {                
+                let productId = new mongoose.Types.ObjectId();
+                const product = new Product({
+                    _id: productId,
+                    name: body.names[id], 
+                    seller: sellerId, 
+                    category: body.categories[id],
+                    description: body.descriptions[id],
+                    price: body.prices[id],
+                    cost: price
+                });
+                product.images.push({
+                    path: file.path
+                });
+            })
+            
             const seller = docs[0];
             seller.products.push(productId);
             seller.save()
@@ -65,5 +113,6 @@ const addProduct = (req, res, next) => {
 
 module.exports = {
     listAllProduct,
-    addProduct
+    addProduct,
+    addManyProduct
 }

@@ -14,10 +14,6 @@ mongoose.Promise = global.Promise;
 mongoose.connect(dbRoute, { useNewUrlParser: true }, (err) => {
     if (err) return console.log(err);
 });
-app.use('/static',express.static(path.join(__dirname,'static/')));
-app.use('/uploads', express.static('uploads'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 //** Adding CORS */
 app.use((req, res, next) => {
@@ -33,11 +29,24 @@ app.use((req, res, next) => {
     next();
 })
 
+app.use('/assets', express.static('assets'));
+app.use('/uploads', express.static('uploads'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 const model = require('./src/model'); //call model
 
 /** Routing middleware */
 const pageRoutes = require('./src/router/pages');
 const router = express.Router();
+
+app.get('/',(req, res) => {
+    res.sendFile(path.resolve(__dirname, 'pages/notReg.html'));
+});
+app.get('/product',(req, res) => {
+    res.sendFile(path.resolve(__dirname, 'pages/product.html'));
+});
+
 const userRoutes = require('./src/router/users');
 const customerRoutes = require('./src/router/customers');
 const sellerRoutes = require('./src/router/sellers');
