@@ -96,7 +96,7 @@ const dBModel = {
     },
 
     printer: {
-        userId: ObjectId,
+        customerId: ObjectId,
         materials: [{
             type: String,
             enum: ['PLA', 'Resin', 'PETG', 'ASA', 'Stainless Steel', 'Titanium', 'ABS', 'Nylon', 'TPU', 'PEI', 'Aluminium'],

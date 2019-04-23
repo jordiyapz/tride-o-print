@@ -12,7 +12,6 @@ const listAllSeller = (req, res, next) => {
             res.status(200).json({
                 count: docs.length,
                 sellers: docs.map(seller => {
-                    console.log(seller.products);
                     return {
                         _id: seller._id,
                         userId: seller.userId,
@@ -155,7 +154,7 @@ const loginSeller = (req, res, next) => {
                             }, 
                             'oPrint',
                             {
-                                expiresIn: "5m"
+                                expiresIn: "2h"
                             });
                             return res.status(200).json({
                                 message: 'Login successful!',

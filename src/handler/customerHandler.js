@@ -18,27 +18,27 @@ const signupCustomer = (req, res, next) => {
                     if (users.length > 0) return res.status(409).json({
                         message: 'Email already used!'
                     })
-                                        
+
                     bcrypt.hash(body.password, parseInt(process.env.SALT) || 10, (err, hash) => {
                         if (err) {
                             console.log(err);
                             return res.status(500).json({ error: err });
                         }
-                        
+
                         const {username, email, phoneNumber} = body;
                         const user = new User({
                             _id: new mongoose.Types.ObjectId(),
-                            username, 
-                            email, 
+                            username,
+                            email,
                             phoneNumber,
-                            password: hash                                                    
+                            password: hash
                         });
                         user.roles.push('Customer');
                         user.save()
                             .catch(error => {
                                 console.log(error);
                                 res.status(500).json({ error:error });
-                            });               
+                            });
                         const customer = new Customer({
                             userId: user._id
                         }).save().then(result => {
@@ -48,7 +48,7 @@ const signupCustomer = (req, res, next) => {
                             console.log(error);
                             res.status(500).json({ error:error });
                         });
-                    });                    
+                    });
                 })
         });
 }
@@ -61,7 +61,7 @@ const signupExistingCustomer = (req, res, next) => {
         /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(input)
     ) finder = User.find({ email: input });
     else finder = User.find({ username: input });
-    
+
     finder.exec()
         .then(users => {
             if (users.length == 0) return res.status(404).json({ message: 'User not found' });
@@ -72,10 +72,10 @@ const signupExistingCustomer = (req, res, next) => {
                         return res.status(500).json({ result, err });
                     }
                     if (result) {
-                        if (user.roles.includes('Customer')) 
+                        if (user.roles.includes('Customer'))
                             return res.status(409).json({ message: 'Already signed up'})
                         else {
-                            user.roles.push('Customer');                           
+                            user.roles.push('Customer');
                             const customer = new Customer({
                                 userId: user._id
                             });
@@ -91,7 +91,7 @@ const signupExistingCustomer = (req, res, next) => {
                                 .catch(error => {
                                     console.log(error);
                                     res.status(500).json({ error:error });
-                                }); 
+                                });
                         }
                     } else
                         return res.status(404).json({ message: 'User not found' })
@@ -101,27 +101,27 @@ const signupExistingCustomer = (req, res, next) => {
     ).catch(err => {
         return res.status(500).json({ error: err });
     });
-    
+
 }
 
 const loginCustomer = (req, res, next) => {
-		const body = req.body;		
+		const body = req.body;
     const {input} = body;
     let finder;
     if (
         /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(input)
     ) finder = User.find({ email: input });
     else finder = User.find({ username: input });
-        
+
     finder.exec()
         .then(users => {
-            if (users.length == 0) 
+            if (users.length == 0)
                 return res.status(409).json({ message: 'Auth failed' });
             const user = users[0];
             bcrypt.compare(body.password, user.password, (err, result) => {
-                if (err) 
+                if (err)
 									return res.status(500).json({ err });
-								if (!result) 
+								if (!result)
 									return res.status(409).json({ message: 'Auth failed' });
 									Customer.find({ userId: user._id })
 										.exec()
@@ -134,10 +134,10 @@ const loginCustomer = (req, res, next) => {
 																email: user.email,
 																phoneNumber: user.phoneNumber,
 																roles: user.roles
-														}, 
+														},
 														'oPrint',
 														{
-																expiresIn: "5m"
+																expiresIn: "2h"
 														});
 														return res.status(200).json({
 																message: 'Login successful!',
@@ -148,9 +148,9 @@ const loginCustomer = (req, res, next) => {
 										.catch(error => {
 												console.log(error);
 												res.status(500).json({ error:error });
-										});                    
+										});
             });
-                    
+
         })
         .catch(error => {
             console.log(error);

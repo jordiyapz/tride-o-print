@@ -1,0 +1,2 @@
+var Products = [];
+var Categories = [];

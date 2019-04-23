@@ -21,11 +21,14 @@ const upload = multer({storage, limits: {
 }}); 
 
 const adminOnly = require('../middleware/admin-only');
+const checkAuth = require('../middleware/check-auth');
 
 const controller = require('../controller');
 
 router.get('/', controller.listAllProduct);
 router.post('/add-product', upload.array('image'), controller.addProduct);
 // router.post('/add-many-product', upload.array('image'), controller.addProduct);
+router.delete('/del-all', adminOnly, controller.deleteAllProduct);
+router.delete('/del-one/:productId', checkAuth, controller.deleteProduct);
 
 module.exports = router;

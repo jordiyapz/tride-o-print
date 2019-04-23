@@ -34,8 +34,14 @@ const productSchema = new Schema({
         default: 0
     },
     cost: Schema.Types.Decimal128,
-    available: Boolean,
-    sold: Number,
+    available: {
+        type: Boolean,
+        default: true
+    },
+    sold: {
+        type: Number,
+        default: 0
+    },
 
     rating: {
         type: Schema.Types.Decimal128,

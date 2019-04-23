@@ -19,7 +19,7 @@ const listAllProduct = (req, res, next) => {
 }
 
 const addProduct = (req, res, next) => {
-    console.log(req.file);    
+    console.log(req.file);
     console.log({body:req.body});
     const body = req.body;
     const files = req.files;
@@ -27,16 +27,17 @@ const addProduct = (req, res, next) => {
     Seller.find({_id: sellerId})
         .exec()
         .then(docs => {
-            if (docs.length == 0) return res.status(404).json({message: 'Seller not found'});            
+            if (docs.length == 0) return res.status(404).json({message: 'Seller not found'});
             const {name, category, description, price} = body;
             let productId = new mongoose.Types.ObjectId();
             const product = new Product({
                 _id: productId,
-                name: name, 
-                seller: sellerId, 
+                name: name,
+                seller: sellerId,
                 category,
                 description,
                 price,
+                rating,
                 cost: price
             });
             files.forEach(file => {
@@ -75,12 +76,12 @@ const addManyProduct = (req, res, next) => {
         .then(docs => {
             if (docs.length < 1) return res.status(404).json({message: 'Seller not found'});
             const {sellerId} = body
-            files.forEach((img, idx) => {                
+            files.forEach((img, idx) => {
                 let productId = new mongoose.Types.ObjectId();
                 const product = new Product({
                     _id: productId,
-                    name: body.names[id], 
-                    seller: sellerId, 
+                    name: body.names[id],
+                    seller: sellerId,
                     category: body.categories[id],
                     description: body.descriptions[id],
                     price: body.prices[id],
@@ -90,7 +91,7 @@ const addManyProduct = (req, res, next) => {
                     path: file.path
                 });
             })
-            
+
             const seller = docs[0];
             seller.products.push(productId);
             seller.save()
@@ -112,8 +113,75 @@ const addManyProduct = (req, res, next) => {
         })
 }
 
+const deleteProduct = (req, res, next) => {
+    Product.findById(req.params.productId).exec()
+        .then( product => {
+            if (product == null)
+                return res.status(404).json({ message: 'Not found' });
+            Seller.findById(product.seller).exec()
+                .then( seller => {
+                    if ( seller != null ) {
+
+                        const idx = seller.products.findIndex( prod => product._id.equals(prod) );
+                        if ( idx == -1 )
+                            console.log(`Product id(${product._id}) is not found in Seller`);
+                        seller.products.splice(idx, 1);
+                        seller.save();
+
+                    }
+                    product.remove()
+                    return res.status(200).json({ message: 'Delete succesful '});
+                })
+                .catch( error => {
+                    if ( error )
+                        return res.status(500).json({ error: error });
+                })
+        })
+        .catch( error => {
+            if (error) {
+                return res.status(500).json({ error });
+            }
+                
+        })
+}
+
+const deleteAllProduct = (req, res, next) => {
+    console.log('delete all');
+    Product.find({}).exec()
+        .then( docs => {
+            if ( docs.length == 0 )
+                return res.status(404).json({ message: 'Nothing to delete' });
+            docs.forEach( product => {
+                Seller.findById(product.seller).exec()
+                    .then( seller => {
+                        if ( seller != null ) {
+
+                            const idx = seller.products.findIndex( prod => product._id.equals(prod) );
+                            if ( idx == -1 )
+                                console.log(`Product id(${product._id}) is not found in Seller`);
+                            seller.products.splice(idx, 1);
+                            seller.save();
+
+                        }
+                        product.remove();
+                    })
+                    .catch( err => {
+                        if ( err )
+                            return res.status(500).json({ error: err });
+                    })
+            })
+            return res.status(500).json({ message: 'Delete Successful' });
+        })
+        .catch( err => {
+            if ( err )
+                return res.status(500).json({ error: err });
+        })
+}
+
 module.exports = {
     listAllProduct,
     addProduct,
-    addManyProduct
+    addManyProduct,
+    deleteProduct,
+    deleteAllProduct
 }

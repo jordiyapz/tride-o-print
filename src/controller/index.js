@@ -2,7 +2,7 @@ const { userHandler, customerHandler, sellerHandler, productHandler } = require(
 const { listAllUser, addUser, updateUser, getUser, deleteUser, signupUser } = userHandler;
 const { signupCustomer, signupExistingCustomer, loginCustomer } = customerHandler;
 const { listAllSeller, signupSeller, signupExistingSeller, loginSeller } = sellerHandler;
-const { listAllProduct, addProduct, addManyProduct } = productHandler;
+const { listAllProduct, addProduct, addManyProduct, deleteProduct, deleteAllProduct } = productHandler;
 
 module.exports = {
     listAllUser,
@@ -20,5 +20,7 @@ module.exports = {
     loginSeller,
     listAllProduct,
     addProduct,
-    addManyProduct
+    addManyProduct,
+    deleteProduct,
+    deleteAllProduct
 }
