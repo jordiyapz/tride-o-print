@@ -1,0 +1,38 @@
+{
+  "name": "tride-o-print",
+  "version": "1.0.0",
+  "description": "Tubes MBD pada semester 2",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.4.20",
+    "body-parser": "^1.18.3",
+    "dotenv": "^7.0.0",
+    "bcrypt": "^3.0.5",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10",
+    "localtunnel": "^1.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordiyapz/TUBES-MBD.git"
+  },
+  "keywords": [
+    "3D-Printing",
+    "e-commerce",
+    "web-app"
+  ],
+  "author": "Jordi Yaputra, Novita Guok",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jordiyapz/TUBES-MBD/issues"
+  },
+  "homepage": "https://github.com/jordiyapz/TUBES-MBD#readme"
+}
