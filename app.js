@@ -40,6 +40,29 @@ const model = require('./src/model'); //call model
 const pageRoutes = require('./src/router/pages');
 const router = express.Router();
 
+const checkToken = (req, res, next) => {
+    const header = req.headers['authorization'];
+    console.log(headers);
+    if(typeof header !== 'undefined') {
+        const bearer = header.split(' ');
+        const token = bearer[1];
+        req.token = token;
+        const decoded = jwt.verify(token, 'oPrint', (err, decoded) => {
+            if (err)
+                res.status(500).json({ error: err });
+            req.userData = decoded;
+            next();
+        });
+        
+    } //else {  
+        //res.json({message: 'auth-failed'});
+        //res.redirect('/auth-failed');
+    //}
+}
+app.get('/auth-failed', (req, res) => {
+    //If header is undefined return Forbidden (403)        
+    res.status(403).sendFile(path.resolve(__dirname, 'pages/authFailed.html'));
+})
 app.get('/',(req, res) => {
     res.sendFile(path.resolve(__dirname, 'pages/notReg.html'));
 });
@@ -49,8 +72,11 @@ app.get('/product',(req, res) => {
 app.get('/register',(req, res) => {
     res.sendFile(path.resolve(__dirname, 'pages/register.html'));
 });
-app.get('/home',(req, res) => {
+app.get('/home', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'pages/index.html'));
+});
+app.get('/blank',(req, res) => {
+    res.sendFile(path.resolve(__dirname, 'pages/blank.html'));
 });
 
 const userRoutes = require('./src/router/users');

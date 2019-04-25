@@ -1065,14 +1065,6 @@
 					<!-- row -->
 					<div class="row">
 						<div class="col-md-12 text-center">
-							<ul class="footer-payments">
-								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-							</ul>
 							<span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</a>
@@ -1087,26 +1079,48 @@
 			<!-- /bottom footer -->
 		</footer>
 		<!-- /FOOTER -->
+		
+		
 		<script src="assets/js/variables.js"></script>
 		<!-- jQuery Plugins -->
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/custom.js"></script>
 		<script>		
 			$('#login-form').submit(e => {
-				console.log('login');
-				$.post('v1/customer/login',
-				{					
-					input: $('#login-form-input').val(),
-					password: $('#login-form-password').val()
-				},
-				(data, status) => {
-					if (status == 'success') {
+				
+				// $.ajax({
+				// 	url: "v1/customer/login",
+				// 	type: 'post',
+				// 	contentType: 'application/json',
+					// headers: {
+					// 		"Authorization": "Bearer " + token
+					// },
+				// 	data: {
+				// 		input: $('#login-form-input').val(),
+				// 		password: $('#login-form-password').val()	
+				// 	},
+				// 	success: (res, status) => {
+				// 		console.log({ res, status });
+				// 	},
+				// 	error: (xhr, status, err) => {
+				// 		console.log({ xhr, status, err });
+				// 	}
+				// })
+				$.post(
+					'v1/customer/login',
+					{
+						input: $('#login-form-input').val(),
+						password: $('#login-form-password').val()
+					},
+					(data, status) => {
+						if (status == 'success') {
 
-						setCookie('token', data.token, 2);
-						window.location.href = "/home";
+							setCookie('token', data.token, .1); // .1 == 6 menit
+							window.location.href = "/home";
 
+						}
 					}
-				});
+				)
 				e.preventDefault();
 			});
 			$.ajax({ 
