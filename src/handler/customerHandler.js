@@ -139,6 +139,13 @@ const loginCustomer = (req, res, next) => {
 														{
 																expiresIn: "2h"
 														});
+														console.log({															
+															message: 'Customer Login successful!',
+															customer: {
+																username: user.username,
+															},
+															token: token
+														})
 														return res.status(200).json({
 																message: 'Login successful!',
 																token: token

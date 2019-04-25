@@ -67,17 +67,17 @@
 											</button>
 										</div>
 										<div class="modal-body">
-											<form action="/v1/customer/login" method="post">
+											<form id="login-form" action="">
 												<div class="form-group">
 													<label for="recipient-name" class="col-form-label">Username or Email</label>
-													<input type="text" name="input" class="form-control" id="recipient-name">
+													<input type="text" name="input" class="form-control" id="login-form-input">
 												</div>
 												<div class="form-group">
 													<label for="message-text" class="col-form-label">Password</label>
-													<input type="password" name="password" class="form-control" id="message-text"></textarea>
+													<input type="password" name="password" class="form-control" id="login-form-password"></textarea>
 												</div>
 												<div class="modal-footer">
-													<input type="submit" class="btn btn-secondary" onclick="console.log('hello')" value="Login" style="background-color: rgb(209,0,36); color: white" />
+													<input type="submit" class="btn btn-secondary" value="Login" style="background-color: rgb(209,0,36); color: white" />
 													<!-- data-dismiss="modal" -->
 												</div>
 											</form>
@@ -1091,7 +1091,24 @@
 		<!-- jQuery Plugins -->
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/custom.js"></script>
-		<script>
+		<script>		
+			$('#login-form').submit(e => {
+				console.log('login');
+				$.post('v1/customer/login',
+				{					
+					input: $('#login-form-input').val(),
+					password: $('#login-form-password').val()
+				},
+				(data, status) => {
+					if (status == 'success') {
+
+						setCookie('token', data.token, 2);
+						window.location.href = "/home";
+
+					}
+				});
+				e.preventDefault();
+			});
 			$.ajax({ 
 				type: 'GET', 
 				url: 'v1/product',

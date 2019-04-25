@@ -46,9 +46,11 @@ app.get('/',(req, res) => {
 app.get('/product',(req, res) => {
     res.sendFile(path.resolve(__dirname, 'pages/product.html'));
 });
-
 app.get('/register',(req, res) => {
     res.sendFile(path.resolve(__dirname, 'pages/register.html'));
+});
+app.get('/home',(req, res) => {
+    res.sendFile(path.resolve(__dirname, 'pages/index.html'));
 });
 
 const userRoutes = require('./src/router/users');
