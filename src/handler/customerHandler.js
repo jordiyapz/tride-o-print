@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Customer = mongoose.model('Customer');
+const Product = mongoose.model('Product');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -128,12 +129,9 @@ const loginCustomer = (req, res, next) => {
 										.then(customers => {
 												if (customers.length > 0) {
 														const token = jwt.sign({
-																userId: user._id,
-																username: user.username,
-																address: user.address,
-																email: user.email,
-																phoneNumber: user.phoneNumber,
-																roles: user.roles
+															_id: customers[0]._id,
+															userId: user._id,
+															username: user.username
 														},
 														'oPrint',
 														{
@@ -141,9 +139,7 @@ const loginCustomer = (req, res, next) => {
 														});
 														console.log({															
 															message: 'Customer Login successful!',
-															customer: {
-																username: user.username,
-															},
+															username: user.username,
 															token: token
 														})
 														return res.status(200).json({
@@ -165,9 +161,48 @@ const loginCustomer = (req, res, next) => {
         });
 }
 
+const getCustomer = (req, res, next) => {
+	Customer.findById(req.params.customerId)
+		.populate('userId')
+		.exec()
+		.then( customer => {
+			return res.status(200).json({ customer });
+		})
+		.catch(error => {
+			if ( error )
+				return res.status(500).json({ error });
+		})
+}
+
+const addToCart = (req, res, next) => {
+	const customerId = req.params.customerId;
+	const {productId, qty} = req.body;
+	Customer.findById(customerId, (err, customer) => {
+		if (err) 
+			return res.status(500).json({ error: err });
+		if (customer == null)
+			return res.status(404).json({ message: 'Customer not found'});
+		Product.findById(productId, (err, product) => {
+			if (err) 
+				return res.status(500).json({ error: err });
+			if (product == null)
+				return res.status(404).json({ message: 'Product not found'});
+			const findId = customer.carts.findIndex( doc => ( doc.productId == productId ));
+			if (findId != -1)
+				customer.carts[findId].qty += parseInt(qty);
+			else 
+				customer.carts.push({productId, qty});
+			customer.save();
+			res.status(200).json({ message: 'Added to cart' })
+		})
+	});
+}
+
 module.exports = {
     signupCustomer,
     signupExistingCustomer,
-    loginCustomer
+		loginCustomer,
+		getCustomer,
+		addToCart
 }
 

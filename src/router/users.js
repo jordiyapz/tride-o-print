@@ -7,6 +7,7 @@ const adminOnly = require('../middleware/admin-only');
 
 router.get('/', controller.listAllUser);
 router.post('/', checkAuth, adminOnly, controller.addUser);
+router.get('/extract-token', checkAuth, controller.extractToken);
 router.get('/:userId', controller.getUser);
 router.put('/:userId', checkAuth, controller.updateUser);
 router.delete('/:userId', checkAuth, controller.deleteUser);

@@ -59,6 +59,7 @@ const checkToken = (req, res, next) => {
         //res.redirect('/auth-failed');
     //}
 }
+
 app.get('/auth-failed', (req, res) => {
     //If header is undefined return Forbidden (403)        
     res.status(403).sendFile(path.resolve(__dirname, 'pages/authFailed.html'));

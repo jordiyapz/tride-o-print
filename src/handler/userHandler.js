@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const listAllUser = (req, res, next) => {
     User.find({})
@@ -100,11 +101,30 @@ const signupUser = (req, res, next) => {
         });
 }
 
+const extractToken = (req, res, next) => {
+    const header = req.headers['authorization'];    
+    if (header != 'undefined') {
+        const bearer = header.split(' ');
+        const token = bearer[1];
+        req.token = token;
+        jwt.verify(token, 'oPrint', (err, decoded) => {
+            if (err)
+                res.status(500).json({ error: err });
+            req.userData = decoded;
+            return res.status(200).json({ userData: decoded });
+        });
+    } 
+    else {
+        return res.status(404).json({ error: 'Token not found' });
+    }
+}
+
 module.exports = {
     listAllUser,
     addUser,
     getUser,
     updateUser,
     deleteUser,
-    signupUser
+    signupUser,
+    extractToken
 }

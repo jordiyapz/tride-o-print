@@ -123,6 +123,10 @@
 						</div>
 						<!-- /SEARCH BAR -->
 
+
+						
+
+
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
@@ -137,12 +141,48 @@
 								<!-- /Wishlist -->
 
 								<!-- Cart -->
-								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+								<div > <!--class="dropdown"-->
+									<i class="fa fa-shopping-cart"></i>
+									<!--<button type="button" style="color: white" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+										
+									</button>-->
+									<br>
+									<span style="color: white";>Your Cart</span>
+									<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<form id="login-form" action="">
+														<div class="form-group">
+															<label for="recipient-name" class="col-form-label">Username or Email</label>
+															<input type="text" name="input" class="form-control" id="login-form-input">
+														</div>
+														<div class="form-group">
+															<label for="message-text" class="col-form-label">Password</label>
+															<input type="password" name="password" class="form-control" id="login-form-password"></textarea>
+														</div>
+														<div class="modal-footer">
+															<input type="submit" class="btn btn-secondary" value="Login" style="background-color: rgb(209,0,36); color: white" />
+															<!-- data-dismiss="modal" -->
+														</div>
+													</form>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+
+									<!--<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
-										<span>Your Cart</span>
+										<span>Your Cart</span>-->
 										<!--<div class="qty">3</div>-->
-									</a>
+									<!--</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
 											<div class="product-widget">
@@ -175,7 +215,7 @@
 											<a href="#">View Cart</a>
 											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
-									</div>
+									</div>-->
 								</div>
 								<!-- /Cart -->
 
@@ -1121,12 +1161,29 @@
 						}
 					}
 				)
+				$.ajax({
+					type: 'POST',
+					url: 'v1/customer/login',
+					dataType: 'json',
+					data: {
+						input: $('#login-form-input').val(),
+						password: $('#login-form-password').val()
+					},
+					success: (res, status) => {
+						if (status == 'success') {
+							setCookie('token', data.token, .1); // .1 == 6 menit
+							window.location.href = "/home";
+						}
+					},
+					error: (xhr, status) => {
+						console.log({ xhr, status });
+					}
+				})
 				e.preventDefault();
 			});
 			$.ajax({ 
 				type: 'GET', 
 				url: 'v1/product',
-				data: { get_param: 'value' }, 
 				dataType: 'json',
 				async: false,
 				success: res => {

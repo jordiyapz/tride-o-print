@@ -52,9 +52,9 @@
 						<li><a href="#"><i class="fa fa-envelope-o"></i> trideoprint@gmail.com</a></li>
 						<li><a href="#"><i class="fa fa-map-marker"></i> Telkom University</a></li>
 					</ul>
-					<ul class="header-links pull-right">
+					<ul id="user-account" class="header-links pull-right">
 						<!--<li><a href="#"><i class="fa fa-dollar"></i> RP</a></li>-->
-						<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+						
 					</ul>
 				</div>
 			</div>
@@ -256,13 +256,7 @@
 						<div class="section-title">
 							<h3 class="title">New Products</h3>
 							<div class="section-nav">
-								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab1">Lamps</a></li>
-									<li><a data-toggle="tab" href="#tab1">Miniatures</a></li>
-									<li><a data-toggle="tab" href="#tab1">Birthdays</a></li>
-									<li><a data-toggle="tab" href="#tab1">Romantics</a></li>
-									<li><a data-toggle="tab" href="#tab1">Gardens</a></li>
-									<li><a data-toggle="tab" href="#tab1">Bedrooms</a></li>
+								<ul id="category-nav-tabs" class="section-tab-nav tab-nav">
 								</ul>
 							</div>
 						</div>
@@ -925,23 +919,36 @@
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/custom.js"></script>
 		<script>		
-			$('#login-form').submit(e => {
-				console.log('login');
-				$.post('v1/customer/login',
-				{					
-					input: $('#login-form-input').val(),
-					password: $('#login-form-password').val()
+			/** Add to cart */
+			/** Load Customer Data */
+			$.ajax({
+				type: 'GET',
+				url: 'v1/user/extract-token',
+				headers: { 
+					'authorization': `Bearer ${getCookie('token')}`
 				},
-				(data, status) => {
-					if (status == 'success') {
-
-						setCookie('token', data.token, 2);
-						window.location.href = "/home";
-
-					}
-				});
-				e.preventDefault();
-			});
+				dataType: 'json',
+				success: res => {
+					const userData = res.userData;
+					console.log(userData);			
+					$('#user-account').html(`<li><a href="#"><i class="fa fa-user-o"></i> ${userData.username}</a></li>`);
+					$.ajax({
+						type: 'GET',
+						url: `v1/customer/${userData._id}`,
+						headers: {
+							'authorization': `Bearer ${getCookie('token')}`
+						},
+						dataType: 'json',
+						success: res => {
+							CustomerData = res.customer;
+						}
+					})
+				},
+				error: (xhr, status) => {
+					window.location.href = "/auth-failed";
+				}
+			})
+			/** Load Products */
 			$.ajax({ 
 				type: 'GET', 
 				url: 'v1/product',
@@ -970,12 +977,12 @@
 						}
 						const _btns = $(`<div class="product-btns"></div>`);
 						_btns.append(
-							$(`<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>`),
-							$(`<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>`),
-							$(`<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>`)
+							$(`<button id="btn-atw-${product._id}" class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>`),
+							$(`<button id="btn-atcmp-${product._id}" class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>`),
+							$(`<button id="btn-atv-${product._id}" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>`)
 						)			
 						const _atc = $(`<div class="add-to-cart"></div>`);
-						_atc.append(`<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>`);
+						_atc.append(`<button id="btn-atc-${product._id}" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>`);
 						_body.append(_category, _name, _price, _rating, _btns);
 						_product.append(_img, _body, _atc);
 						newProduct.append(_product);
