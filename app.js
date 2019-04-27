@@ -76,8 +76,8 @@ app.get('/register',(req, res) => {
 app.get('/home', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'pages/index.html'));
 });
-app.get('/blank',(req, res) => {
-    res.sendFile(path.resolve(__dirname, 'pages/blank.html'));
+app.get('/checkout',(req, res) => {
+    res.sendFile(path.resolve(__dirname, 'pages/checkout.html'));
 });
 
 const userRoutes = require('./src/router/users');

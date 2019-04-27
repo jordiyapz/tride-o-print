@@ -32,6 +32,10 @@
 				width: 213px;
 				height: 213px;
 			}
+			.product-widget img {
+				width: 60px;
+				height: 60px;
+			}
 		</style>
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,7 +44,7 @@
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-    </head>
+	</head>
 	<body>
 		<!-- HEADER -->
 		<header>
@@ -112,36 +116,11 @@
 										<!--<div class="qty">3</div>-->
 									</a>
 									<div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product01.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-										</div>
-										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div>
+										<div class="cart-list"></div>
+										<div class="cart-summary"></div>
 										<div class="cart-btns">
 											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+											<a href="/checkout">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
 								</div>
@@ -270,7 +249,7 @@
 								<!-- tab -->
 								<div id="tab1" class="tab-pane active">
 									<div id="newProduct" class="products-slick" data-nav="#slick-nav-1">
-										<!-- Product Goes Here								 -->
+										<!-- Product Goes Here -->
 									</div>
 									<div id="slick-nav-1" class="products-slick-nav"></div>
 								</div>
@@ -286,76 +265,12 @@
 		</div>
 		<!-- /SECTION -->
 
-		<!-- HOT DEAL SECTION -->
-		<div id="hot-deal" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<!-- <div class="row">
-					<div class="col-md-12">
-						<div class="hot-deal">
-							<ul class="hot-deal-countdown">
-								<li>
-									<div>
-										<h3>02</h3>
-										<span>Days</span>
-									</div>
-								</li>
-								<li>
-									<div>
-										<h3>10</h3>
-										<span>Hours</span>
-									</div>
-								</li>
-								<li>
-									<div>
-										<h3>34</h3>
-										<span>Mins</span>
-									</div>
-								</li>
-								<li>
-									<div>
-										<h3>60</h3>
-										<span>Secs</span>
-									</div>
-								</li>
-							</ul>
-							<h2 class="text-uppercase">hot deal this week</h2>
-							<p>New Collection Up to 50% OFF</p>
-							<a class="primary-btn cta-btn" href="#">Shop now</a>
-						</div>
-					</div>
-				</div> -->
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /HOT DEAL SECTION -->
-
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-
-					<!-- section title -->
-					<!--
-					<div class="col-md-12">
-						<div class="section-title">
-							<h3 class="title">Top selling</h3>
-							<div class="section-nav">
-								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
-									<li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
-									<li><a data-toggle="tab" href="#tab2">Cameras</a></li>
-									<li><a data-toggle="tab" href="#tab2">Accessories</a></li>
-								</ul>
-							</div>
-						</div>
-					</div> -->
-					<!-- /section title -->
-
 					<!-- Products tab & slick -->
 					<div class="col-md-12">
 						<div class="row">
@@ -523,302 +438,6 @@
 		</div>
 		<!-- /SECTION -->
 
-		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row 
-				<div class="row">
-					<div class="col-md-4 col-xs-6">
-						<div class="section-title">
-							<h4 class="title">Top selling</h4>
-							<div class="section-nav">
-								<div id="slick-nav-3" class="products-slick-nav"></div>
-							</div>
-						</div>
-
-						<div class="products-widget-slick" data-nav="#slick-nav-3">
-							<div> -->
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product07.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- /product widget -->
-
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product08.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- /product widget -->
-
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product09.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- product widget -->
-							</div>
-
-							<div>
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product01.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- /product widget -->
-
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product02.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- /product widget -->
-
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product03.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- product widget -->
-							</div>
-						</div>
-					</div>
-
-					<!--
-					<div class="col-md-4 col-xs-6">
-						<div class="section-title">
-							<h4 class="title">Top selling</h4>
-							<div class="section-nav">
-								<div id="slick-nav-4" class="products-slick-nav"></div>
-							</div>
-						</div>
-
-						<div class="products-widget-slick" data-nav="#slick-nav-4">
-							<div> -->
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product04.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- /product widget -->
-
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product05.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- /product widget -->
-
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product06.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- product widget -->
-							</div>
-
-							<div>
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product07.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- /product widget -->
-
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product08.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- /product widget -->
-
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product09.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- product widget -->
-							</div>
-						</div>
-					</div>
-
-					<div class="clearfix visible-sm visible-xs"></div>
-
-					<!--
-					<div class="col-md-4 col-xs-6">
-						<div class="section-title">
-							<h4 class="title">Top selling</h4>
-							<div class="section-nav">
-								<div id="slick-nav-5" class="products-slick-nav"></div>
-							</div>
-						</div>
-
-						<div class="products-widget-slick" data-nav="#slick-nav-5">
-							<div> -->
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product01.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- /product widget -->
-
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product02.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- /product widget -->
-
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product03.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- product widget -->
-							</div>
-
-							<div>
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product04.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- /product widget -->
-
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product05.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- /product widget -->
-
-								<!-- product widget 
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product06.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div> -->
-								<!-- product widget -->
-							</div>
-						</div>
-					</div>
-
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
-
 		<!-- FOOTER -->
 		<footer id="footer">
 			<!-- top footer -->
@@ -891,14 +510,6 @@
 					<!-- row -->
 					<div class="row">
 						<div class="col-md-12 text-center">
-							<ul class="footer-payments">
-								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-							</ul>
 							<span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</a>
@@ -918,36 +529,43 @@
 		<!-- jQuery Plugins -->
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/custom.js"></script>
-		<script>		
-			/** Add to cart */
-			/** Load Customer Data */
-			$.ajax({
-				type: 'GET',
-				url: 'v1/user/extract-token',
-				headers: { 
-					'authorization': `Bearer ${getCookie('token')}`
-				},
-				dataType: 'json',
-				success: res => {
-					const userData = res.userData;
-					console.log(userData);			
-					$('#user-account').html(`<li><a href="#"><i class="fa fa-user-o"></i> ${userData.username}</a></li>`);
+		<script>
+			/** onLoad */
+			$(() => {
+				reloadCustomerData();
+				// setTimeout(updateCart, 100);
+				/** Add to cart */
+				$('.add-to-cart-btn').click(e => {
+					const token = getCookie('token');
+					if (token == "") 
+						return window.location.href = '/';
+					const productId = e.currentTarget.id.split('-')[2];
+					console.log({
+						id: e.currentTarget.id,
+						productId
+					})
 					$.ajax({
-						type: 'GET',
-						url: `v1/customer/${userData._id}`,
+						url: `/v1/customer/${CustomerData._id}/add-to-cart`,
+						type: 'PUT',
 						headers: {
-							'authorization': `Bearer ${getCookie('token')}`
+							'authorization': `Bearer ${token}`
 						},
 						dataType: 'json',
-						success: res => {
-							CustomerData = res.customer;
+						data: {
+							productId: productId,
+							qty: '1'
+						},
+						success: (res, status) => {
+							reloadCustomerData();
+							// setTimeout(updateCart, 100);
+						},
+						error: (xhr, status) => {
+							console.log({ xhr, status });
 						}
 					})
-				},
-				error: (xhr, status) => {
-					window.location.href = "/auth-failed";
-				}
+				})
 			})
+
 			/** Load Products */
 			$.ajax({ 
 				type: 'GET', 
@@ -971,18 +589,20 @@
 						const _price = $(`<h4 class="product-price">${toRpString(product.price.$numberDecimal)}</h4>`);
 						const _rating = $(`<div class="product-rating"></div>`);
 						const productRating = Math.floor(parseFloat(product.rating.$numberDecimal));
-						console.log({name: product.name, productRating: product.rating.$numberDecimal});
+						// console.log({name: product.name, productRating: product.rating.$numberDecimal});
 						for(let i = 0; i < productRating; i++) {
 							_rating.append($(`<i class="fa fa-star"></i>`));
 						}
 						const _btns = $(`<div class="product-btns"></div>`);
+						console.log({ name: product.name, id: product._id });
 						_btns.append(
 							$(`<button id="btn-atw-${product._id}" class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>`),
 							$(`<button id="btn-atcmp-${product._id}" class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>`),
 							$(`<button id="btn-atv-${product._id}" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>`)
-						)			
+						)		
 						const _atc = $(`<div class="add-to-cart"></div>`);
 						_atc.append(`<button id="btn-atc-${product._id}" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>`);
+						console.log(_atc[0].childNodes[0]);
 						_body.append(_category, _name, _price, _rating, _btns);
 						_product.append(_img, _body, _atc);
 						newProduct.append(_product);
@@ -995,6 +615,71 @@
 					})
 				}
 			});
+			
+			function updateCart() {
+				const _cartList = $('.cart-list');
+				const _cartSummary = $('.cart-summary');
+				_cartList.html('');
+				_cartSummary.html('');
+				let count = 0;
+				let totalPrice = 0;
+				CustomerData.carts.forEach((cartItem) => {
+					const product = Products.find(obj => (obj._id == cartItem.productId));
+					if (product != null) {
+						const _productWidget = $('<div class="product-widget"></div>');
+						const _productImg = $('<div class="product-img"></div>');
+						_productImg.append($(`<img src="${product.images[0].path}" alt="img-${product.name}">`));
+						const _productBody = $('<div class="product-body"></div>');
+						_productBody.append(
+							$(`<h3 class="product-name"><a href="#">${product.name}</a></h3>`),
+							$(`<h4 class="product-price"><span class="qty">${cartItem.qty}x</span>${toRpString(product.price.$numberDecimal)}</h4>`)
+						)
+						_productWidget.append(
+							_productImg,
+							_productBody,
+							$(`<button class="delete"><i class="fa fa-close"></i></button>`)
+						);
+						_cartList.append(_productWidget);
+						count++;
+						totalPrice += parseInt(product.price.$numberDecimal);
+					} else 
+						console.log({ message: 'Cart item not found', item: cartItem });
+				})
+				_cartSummary.append(
+					$(`<small>${count} Item(s) selected</small>`),
+					$(`<h5>SUBTOTAL: ${toRpString(totalPrice)}</h5>`)
+				)
+			}
+			function reloadCustomerData() {
+				$.ajax({
+					type: 'GET',
+					url: 'v1/user/extract-token',
+					headers: { 
+						'authorization': `Bearer ${getCookie('token')}`
+					},
+					dataType: 'json',
+					success: res => {
+						const userData = res.userData;
+						// console.log(userData);			
+						$('#user-account').html(`<li><a href="#"><i class="fa fa-user-o"></i> ${userData.username}</a></li>`);
+						$.ajax({
+							type: 'GET',
+							url: `v1/customer/${userData._id}`,
+							headers: {
+								'authorization': `Bearer ${getCookie('token')}`
+							},
+							dataType: 'json',
+							success: res => {
+								CustomerData = res.customer;
+								updateCart();
+							}
+						})
+					},
+					error: (xhr, status) => {
+						window.location.href = "/auth-failed";
+					}
+				})
+			}
 		</script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/slick.min.js"></script>
