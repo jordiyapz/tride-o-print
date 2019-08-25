@@ -89,9 +89,9 @@
 					const password = $('#inputPassword').val();
 					const rePassword = $('#confirmPassword').val();
 					const phoneNumber = $('#inputPhoneNum').val();
-					console.log({
-						username, email, password, rePassword, phoneNumber
-					})
+					// console.log({
+					// 	username, email, password, rePassword, phoneNumber
+					// })
 					if (username == '' || email == '' || password == '' || rePassword == '' || phoneNumber == '')
 						return console.log('All field are required');
 					if (password != rePassword)
@@ -126,8 +126,9 @@
 						},
 						error: (xhr, status) => {
 							console.log({ xhr, status });
+							alert(xhr.responseJSON.message);
 						}
-					})						
+					})
 					e.preventDefault();
 				})
 			})

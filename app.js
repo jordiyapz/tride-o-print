@@ -79,12 +79,14 @@ app.get('/home', (req, res) => {
 app.get('/checkout',(req, res) => {
     res.sendFile(path.resolve(__dirname, 'pages/checkout.html'));
 });
+// ^^ di atas ini route umum
 
+// vv di bawah ini route backend
 const userRoutes = require('./src/router/users');
 const customerRoutes = require('./src/router/customers');
 const sellerRoutes = require('./src/router/sellers');
 const productRoutes = require('./src/router/products');
-app.use(pageRoutes);
+app.use(pageRoutes); 
 app.use('/v1/user', userRoutes);
 app.use('/v1/customer', customerRoutes);
 app.use('/v1/seller', sellerRoutes);
