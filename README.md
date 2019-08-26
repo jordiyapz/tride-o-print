@@ -1,5 +1,5 @@
-# TUBES-MBD
-untuk tubes MBD Sem2
+# Tride O Print
+Tubes mata kuliah Model Bisnis Digital semester 4
 
 # Backend
 Jalankan dengan cara membuka terminal di direktori backend, kemudian ketik "npm start"
