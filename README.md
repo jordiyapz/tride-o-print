@@ -1,4 +1,4 @@
-# Tride O Print
+# Tride-O-Print
 Tubes mata kuliah Model Bisnis Digital semester 4
 
 # Backend
